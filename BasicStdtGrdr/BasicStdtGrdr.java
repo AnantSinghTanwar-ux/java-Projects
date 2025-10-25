@@ -37,11 +37,23 @@ public class BasicStdtGrdr {
                 double[] scores = new double[5];
                 System.out.println("Enter 5 test scores:");
                 
+                boolean validScores = true;
                 for (int j = 0; j < 5; j++) {
                     System.out.print("Score " + (j + 1) + ": ");
                     scores[j] = scanner.nextDouble();
+                    
+                    if (scores[j] < 0 || scores[j] > 100) {
+                        System.out.println("Error: Score must be between 0 and 100! Please re-enter data for this student.");
+                        validScores = false;
+                        break;
+                    }
                 }
                 scanner.nextLine(); // Clear newline
+                
+                if (!validScores) {
+                    i--; // Retry this student
+                    continue;
+                }
                 
                 Student student = new Student(name, scores);
                 students.add(student);

@@ -89,9 +89,20 @@ public class SimpleInventoryManager {
         System.out.print("Enter item price: $");
         double price = scanner.nextDouble();
         
+        if (price < 0) {
+            System.out.println("Error: Price cannot be negative!");
+            scanner.nextLine(); // Clear newline
+            return;
+        }
+        
         System.out.print("Enter stock quantity: ");
         int quantity = scanner.nextInt();
         scanner.nextLine(); // Clear newline
+        
+        if (quantity < 0) {
+            System.out.println("Error: Quantity cannot be negative!");
+            return;
+        }
         
         InventoryItem item = new InventoryItem(name, price, quantity);
         inventory.add(item);
@@ -149,6 +160,11 @@ public class SimpleInventoryManager {
         System.out.print("Enter new stock quantity: ");
         int newQuantity = scanner.nextInt();
         scanner.nextLine(); // Clear newline
+        
+        if (newQuantity < 0) {
+            System.out.println("Error: Quantity cannot be negative!");
+            return;
+        }
         
         inventory.get(id - 1).setQuantity(newQuantity);
         System.out.println("Stock updated successfully!");
